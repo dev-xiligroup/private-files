@@ -11,6 +11,9 @@ needs some few modifications in .htaccess of the website. (better than permalink
 
 ## References
 WordPress multisite
+
 Two posts on 
+
 https://wordpress.stackexchange.com/questions/37144/how-to-protect-uploads-if-user-is-not-logged-in/37743#37743
+
 https://wordpress.stackexchange.com/questions/281500/protecting-direct-access-to-pdf-and-zip-unless-user-logged-in-without-plugin
