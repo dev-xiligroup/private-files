@@ -1,11 +1,12 @@
 # private-files
-WP private files according capabilities and parent (post linked to this attachment) custom fields
+WP private files according capabilities and parent (post linked to the attachment describing the file in WP database) custom fields
 
 ## protects files
 When downloading files from a WP website, test if the file can be downloaded. Test capabilities of connected user or test parent post (private or not) or custom fields of parent of attachment containing the file.
 
 ## prerequisite
-some knowledge in .htaccess and in WP core files.
+some knowledges in .htaccess and in WP core files.
+
 
 ## Technical parts
 
@@ -26,6 +27,9 @@ Above only pdf and zip files are tested. Comment the line if not mandatory
 
 ## Comments
 This is an example that must be adapted to your context.
+
+## Plugin
+No extra plugin are mandatory to describe capabilities (if you want to use this way to select connected user). For tests, I use [Members](https://wordpress.org/plugins/members/) from Justin Tadlock.
 
 ## References
 WordPress multisite
