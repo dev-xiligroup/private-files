@@ -10,7 +10,7 @@
  * @license GPL-3.0+
  */
 /**
- * example of lines to insert in .htaccess
+ * example of lines to insert in .htaccess - here test only pdf and zip
  * RewriteCond %{REQUEST_URI} \.(pdf|zip)$ [NC]
  * RewriteCond %{REQUEST_FILENAME} -s
  * RewriteRule ^wp-content/uploads/(.*)$ wp-content/mu-plugins/files-protect/xili-protect-files.php?file=$1 [QSA,L]
@@ -86,7 +86,7 @@ if ( check_file_authorization( $file_url ) && check_user_authorization( $mime ) 
 }
 
 /**
- * check user authorization according mime type if not logged
+ * check user authorization according mime type if not logged - must be coherant with htaccess
  * @param  array $mime mime type array
  * @return boolean       true if ok
  */
