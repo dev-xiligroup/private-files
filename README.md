@@ -32,7 +32,7 @@ This is an example that must be adapted to your context.
 No extra plugin are mandatory to describe capabilities (if you want to use this way to select connected user). For tests, I use [Members](https://wordpress.org/plugins/members/) from Justin Tadlock.
 
 ## References
-WordPress multisite
+WordPress multisite - wp-includes/ms-files.php
 
 Two posts on 
 
