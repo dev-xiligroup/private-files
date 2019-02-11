@@ -4,6 +4,9 @@ WP private files according capabilities and parent (post linked to this attachme
 ## protects files
 When downloading files from a WP website, test if the file can be downloaded. Test capabilities of connected user or test parent post (private or not) or custom fields of parent of attachment containing the file.
 
+## prerequisite
+some knowledge in .htaccess and in WP core files.
+
 ## Technical parts
 
 needs a the file making the test in mu-plugins sub-folder.
@@ -21,6 +24,8 @@ needs some few modifications in .htaccess of the website. (better than permalink
 
 Above only pdf and zip files are tested. Comment the line if not mandatory
 
+## Comments
+This is an example that must be adapted to your context.
 
 ## References
 WordPress multisite
