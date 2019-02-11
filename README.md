@@ -15,7 +15,7 @@ needs some few modifications in .htaccess of the website. (better than permalink
 > 
 > RewriteCond %{REQUEST_FILENAME} -s
 > 
-> RewriteRule ^wp-content/uploads/(.*)$ wp-content/mu-plugins/files-protect/dl-file.php?file=$1 [QSA,L]
+> RewriteRule ^wp-content/uploads/(.*)$ wp-content/mu-plugins/files-protect/xili-protect-files.php?file=$1 [QSA,L]
 
 
 
