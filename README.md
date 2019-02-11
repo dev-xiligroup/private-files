@@ -19,7 +19,7 @@ needs some few modifications in .htaccess of the website. (better than permalink
 
 
 
-Above only pdf and zip files are tested.
+Above only pdf and zip files are tested. Comment the line if not mandatory
 
 
 ## References
