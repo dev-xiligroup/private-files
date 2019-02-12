@@ -27,6 +27,14 @@ Above only pdf and zip files are tested. Comment the line if not mandatory
 
 ## Comments
 This is an example that must be adapted to your context.
+## FAQ
+### Why the file is in a sub-folder inside mu-plugins ?
+Because this file is called only if rules inside .htaccess are met. In mu-plugins folder, only files in root are fired during starting of WP.
+### Why not a plugin ?
+This choice to avoid unexpected deactivation.
+### Why introducing capabilities in this example ?
+The posts found in [stackexchange](https://wordpress.stackexchange.com) only select connected and non connected user.
+By introducing capabilities, we can refine the selection according specific “group”.
 
 ## Plugin
 No extra plugin are mandatory to describe capabilities (if you want to use this way to select connected user). For tests, I use [Members](https://wordpress.org/plugins/members/) from Justin Tadlock.
