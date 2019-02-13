@@ -4,7 +4,7 @@ WP private files according capabilities (of connected visitors) and parent (post
 ## protects files
 When downloading files from a WP website, test if the file can be downloaded. Test capabilities of connected user or test parent post (private or not) or custom fields of parent of attachment containing the file.
 
-## prerequisite
+## prerequisites
 some knowledges in .htaccess and in WP core files.
 
 
