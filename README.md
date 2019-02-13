@@ -35,6 +35,10 @@ This choice to avoid unexpected deactivation.
 ### Why introducing capabilities in this example ?
 The posts found in [stackexchange](https://wordpress.stackexchange.com) only select connected and non connected user.
 By introducing capabilities, we can refine the selection according specific “group”.
+Here capability “read_xili_protect_content” is tested if post custom field ‘xili_protect_content’ of parent field is set to “1”.
+
+### When the file is not downloadable, how to adapt redirection ?
+In this example, the redirection is done to home of website with variable: ?message=UNAUTHORIZED... Other solutions are possible.
 
 ## Plugin
 No extra plugin are mandatory to describe capabilities (if you want to use this way to select connected user). For tests, I use [Members](https://wordpress.org/plugins/members/) from Justin Tadlock.

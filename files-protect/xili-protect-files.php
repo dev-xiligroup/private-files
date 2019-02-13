@@ -99,12 +99,13 @@ function check_user_authorization( $mime ) {
 			$authorized = false;
 		}
 	} else {
+		// can here add more tests
 		$authorized = true;
 	}
 	return $authorized;
 }
 /**
- * check user capabilities description]
+ * check user capabilities
  * @param  text $protect_content describe capability (w/o prefix read)
  * @return boolean true if ok
  */
@@ -124,7 +125,7 @@ function check_user_capabilities( $protect_content ) {
 /**
  * check file authorization according user capabilities and private protection
  * @param  text $full_file file folder and name as in table post
- * @return boolean            true iff authorized to be downloaded
+ * @return boolean            true if authorized to be downloaded
  */
 function check_file_authorization( $full_file ) {
 	$attachments = get_posts(
