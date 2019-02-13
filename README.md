@@ -40,6 +40,9 @@ Here capability “read_xili_protect_content” is tested if post custom field �
 ### When the file is not downloadable, how to adapt redirection ?
 In this example, the redirection is done to home of website with variable: ?message=UNAUTHORIZED... Other solutions are possible.
 
+### no image is visible when no user connected.
+It is because the private rulers are too hard. You can subselect in .htaccess or in check_user_authorization() function with $mime type.
+
 ## Plugin
 No extra plugin are mandatory to describe capabilities (if you want to use this way to select connected user). For tests, I use [Members](https://wordpress.org/plugins/members/) from Justin Tadlock.
 
