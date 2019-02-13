@@ -23,7 +23,7 @@ needs some few modifications in .htaccess of the website. (better than permalink
 
 
 
-Above only pdf and zip files are tested. Comment the line if not mandatory
+Above only pdf and zip files are tested. Comment the line if not required.
 
 ## Comments
 This is an example that must be adapted to your context.
@@ -44,7 +44,7 @@ In this example, the redirection is done to home of website with variable: ?mess
 It is because the private rulers are too hard. You can subselect in .htaccess or in check_user_authorization() function with $mime type.
 
 ## Plugin
-No extra plugin are mandatory to describe capabilities (if you want to use this way to select connected user). For tests, I use [Members](https://wordpress.org/plugins/members/) from Justin Tadlock.
+No extra plugin are required to describe capabilities (if you want to use this way to select connected user). For tests, I use [Members](https://wordpress.org/plugins/members/) from Justin Tadlock.
 
 ## References
 WordPress multisite - wp-includes/ms-files.php
