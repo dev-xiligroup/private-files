@@ -2,7 +2,7 @@
 /**
  * xili-protect-files.php
  *
- * Protect uploaded files with login.
+ * Protect uploaded files with combined checks (connected, capability, parent post features.
  *
  * @link https://github.com/dev-xiligroup/private-files
  *
