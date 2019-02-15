@@ -33,7 +33,7 @@ if ( ! $basedir || ! is_file( $file ) ) {
 $mime = wp_check_filetype( $file );
 
 /**
- * 'current_user_can' test to overhide file checking when admin / editor is connected - admin side test don't work here and in gutenberg editor
+ * 'current_user_can' test to override file checking when admin / editor is connected - admin side test don't work here and in gutenberg editor
  */
 if ( current_user_can( 'edit_posts' ) || ( check_file_authorization( $file_url ) && check_user_authorization( $mime ) ) ) {
 

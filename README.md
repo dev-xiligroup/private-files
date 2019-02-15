@@ -54,3 +54,10 @@ Two posts on
 https://wordpress.stackexchange.com/questions/37144/how-to-protect-uploads-if-user-is-not-logged-in/37743#37743
 
 https://wordpress.stackexchange.com/questions/281500/protecting-direct-access-to-pdf-and-zip-unless-user-logged-in-without-plugin
+
+## Versions
+
+## 0.2 - 190215
+Test added to override file checking when post editing
+## 0.0
+First public shipping.
