@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * xili-protect-files.php
  *
  * Protect uploaded files with login.
@@ -8,6 +8,8 @@
  *
  * @author xiligroup - inspired by hakre <http://hakre.wordpress.com/>
  * @license GPL-3.0+
+ *
+ * @version 0.2
  */
 /**
  * example of lines to insert in .htaccess - here test only pdf and zip
@@ -30,7 +32,10 @@ if ( ! $basedir || ! is_file( $file ) ) {
 
 $mime = wp_check_filetype( $file );
 
-if ( check_file_authorization( $file_url ) && check_user_authorization( $mime ) ) {
+/**
+ * 'current_user_can' test to overhide file checking when admin / editor is connected - admin side test don't work here and in gutenberg editor
+ */
+if ( current_user_can( 'edit_posts' ) || ( check_file_authorization( $file_url ) && check_user_authorization( $mime ) ) ) {
 
 	if ( false === $mime['type'] && function_exists( 'mime_content_type' ) ) {
 		$mime['type'] = mime_content_type( $file );
@@ -79,7 +84,7 @@ if ( check_file_authorization( $file_url ) && check_user_authorization( $mime ) 
 	readfile( $file );
 	exit;
 } else { // get_permalink( $post->post_parent )
-	// error_log( '******** UNAUTHORIZED ' . $file );
+	//error_log( '******** UNAUTHORIZED ' . $file );
 	if ( wp_redirect( home_url() . '?message=UNAUTHORIZED' ) ) {
 		exit;
 	}
@@ -140,15 +145,17 @@ function check_file_authorization( $full_file ) {
 		)
 	);
 	// here only test first parent found
+	// if attachment is used in another post - only the first is taken into account.
 	if ( 0 < count( $attachments ) && 0 < $attachments[0]->post_parent ) { // attachment found and parent available
 		// error_log( '***** full_file 1  *** ' . $full_file );
 		if ( post_password_required( $attachments[0]->post_parent ) ) { // password for the post is not available
 			return false;
 		}
 		$status = get_post_meta( $attachments[0]->post_parent, 'xili_protect_content', true );
-		// error_log( '*****$status*** ' . serialize( $status ) . ' - ' . $attachments[0]->post_parent );
+		//error_log( '*****$status*** ' . serialize( $status ) . ' - ' . $attachments[0]->post_parent );
 		if ( 1 == $status ) {
 			if ( ! check_user_capabilities( 'xili_protect_content' ) ) {
+				//error_log( '******** UNAUTHORIZED ' . $full_file );
 				return false;
 			}
 		}
