@@ -59,5 +59,5 @@ https://wordpress.stackexchange.com/questions/281500/protecting-direct-access-to
 
 ### 0.2 - 190215
 Test added to override file checking when post editing
-### 0.0
+### 0.0 - 190208
 First public shipping.
