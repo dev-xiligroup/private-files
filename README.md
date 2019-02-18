@@ -10,7 +10,7 @@ some knowledges in .htaccess and in WP core files.
 
 ## Technical parts
 
-needs a the file making the test in mu-plugins sub-folder.
+needs a php file making the tests in mu-plugins sub-folder.
 needs some few modifications in .htaccess of the website. (better than permalink rules modifications)
 
 
@@ -30,8 +30,10 @@ This is an example that must be adapted to your context.
 ## FAQ
 ### Why the file is in a sub-folder inside mu-plugins ?
 Because this file is called only if rules inside .htaccess are met. In mu-plugins folder, only files in root are fired during starting of WP.
+
 ### Why not a plugin ?
 This choice to avoid unexpected deactivation.
+
 ### Why introducing capabilities in this example ?
 The posts found in [stackexchange](https://wordpress.stackexchange.com) only select connected and non connected user.
 By introducing capabilities, we can refine the selection according specific “group”.
