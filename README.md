@@ -41,6 +41,8 @@ Here capability “read_xili_protect_content” is tested if post custom field �
 
 ### When the file is not downloadable, how to adapt redirection ?
 In this example, the redirection is done to home of website with variable: ?message=UNAUTHORIZED... Other solutions are possible.
+### If a type of files is set in .htaccess, only connected users can download it. How to set public files for non connected users ?
+by setting a custom field ‘xili_public_content’ to 1 in parent of this attachment.
 
 ### no image is visible when no user connected.
 It is because the private rulers are too hard. You can subselect in .htaccess or in check_user_authorization() function with $mime type.
