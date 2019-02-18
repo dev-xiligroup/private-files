@@ -9,7 +9,7 @@
  * @author xiligroup - inspired by hakre <http://hakre.wordpress.com/>
  * @license GPL-3.0+
  *
- * @version 0.2
+ * @version 0.3
  */
 /**
  * example of lines to insert in .htaccess - here test only pdf and zip
@@ -32,10 +32,12 @@ if ( ! $basedir || ! is_file( $file ) ) {
 
 $mime = wp_check_filetype( $file );
 
+$file_properties = check_file_authorization( $file_url );
+
 /**
  * 'current_user_can' test to override file checking when admin / editor is connected - admin side test don't work here and in gutenberg editor
  */
-if ( current_user_can( 'edit_posts' ) || ( check_file_authorization( $file_url ) && check_user_authorization( $mime ) ) ) {
+if ( current_user_can( 'edit_posts' ) || ( $file_properties['check'] && check_user_mime_authorization( $mime, $file_properties['parent'] ) ) ) {
 
 	if ( false === $mime['type'] && function_exists( 'mime_content_type' ) ) {
 		$mime['type'] = mime_content_type( $file );
@@ -93,15 +95,29 @@ if ( current_user_can( 'edit_posts' ) || ( check_file_authorization( $file_url )
 /**
  * check user authorization according mime type if not logged - must be coherant with htaccess
  * @param  array $mime mime type array
+ * @param  integer $file_parent parent ID
  * @return boolean       true if ok
  */
-function check_user_authorization( $mime ) {
-	// error_log( '******** ' . serialize( $mime ) );
+function check_user_mime_authorization( $mime, $file_parent ) {
+	//error_log( '******** mime ' . serialize( $mime ) . ' - ' . $file_parent );
 	if ( ! is_user_logged_in() ) {
-		if ( in_array( $mime['ext'], array( 'jpg', 'jpeg', 'png' ) ) ) {
+		if ( in_array( $mime['ext'], array( 'jpg', 'jpeg', 'png' ), true ) ) {
 			$authorized = true;
 		} else {
-			$authorized = false;
+			// here add more tests for public download
+			// because by default non connected users cannot download files tested in this file
+			if ( 0 < $file_parent ) {
+				$status = get_post_meta( $file_parent, 'xili_public_content', true );
+				// not connected and public files (like pdf)
+				// 'xili_public_content' must be set to 1
+				if ( 1 == $status ) {
+					$authorized = true;
+				} else {
+					$authorized = false;
+				}
+			} else {
+				$authorized = false;
+			}
 		}
 	} else {
 		// can here add more tests
@@ -110,7 +126,7 @@ function check_user_authorization( $mime ) {
 	return $authorized;
 }
 /**
- * check user capabilities
+ * check user capabilities according custom fields
  * @param  text $protect_content describe capability (w/o prefix read)
  * @return boolean true if ok
  */
@@ -130,7 +146,9 @@ function check_user_capabilities( $protect_content ) {
 /**
  * check file authorization according user capabilities and private protection
  * @param  text $full_file file folder and name as in table post
- * @return boolean            true if authorized to be downloaded
+ * @return array
+ *         bool 'check'  true if authorized to be downloaded
+ *         integer 'parent'  parent ID
  */
 function check_file_authorization( $full_file ) {
 	$attachments = get_posts(
@@ -145,20 +163,30 @@ function check_file_authorization( $full_file ) {
 		)
 	);
 	// here only test first parent found
+	// error_log( 'message ' . count( $attachments ) );
 	// if attachment is used in another post - only the first is taken into account.
 	if ( 0 < count( $attachments ) && 0 < $attachments[0]->post_parent ) { // attachment found and parent available
-		// error_log( '***** full_file 1  *** ' . $full_file );
+		//error_log( '***** full_file 1  *** ' . $full_file );
 		if ( post_password_required( $attachments[0]->post_parent ) ) { // password for the post is not available
-			return false;
+			return array(
+				'check'  => false,
+				'parent' => $attachments[0]->post_parent,
+			);
 		}
 		$status = get_post_meta( $attachments[0]->post_parent, 'xili_protect_content', true );
 		//error_log( '*****$status*** ' . serialize( $status ) . ' - ' . $attachments[0]->post_parent );
 		if ( 1 == $status ) {
 			if ( ! check_user_capabilities( 'xili_protect_content' ) ) {
-				//error_log( '******** UNAUTHORIZED ' . $full_file );
-				return false;
+				return array(
+					'check'  => false,
+					'parent' => $attachments[0]->post_parent,
+				);
 			}
 		}
+		return array(
+			'check'  => true,
+			'parent' => $attachments[0]->post_parent,
+		);
 	} else {
 
 		// not a normal attachment check for thumbnail
@@ -185,14 +213,19 @@ function check_file_authorization( $full_file ) {
 						foreach ( $meta['sizes'] as $single_size ) {
 							if ( $filename['filename'] . '.' . $filename['extension'] == $single_size['file'] ) {
 								if ( post_password_required( $single_image->post_parent ) ) { // password for the post is not available
-									return false;
+									return array(
+										'check'  => false,
+										'parent' => $single_image->post_parent,
+									);
 								}
-								//die( 'dD' );
 								$status = get_post_meta( $single_image->post_parent, 'xili_protect_content', true );
 
 								if ( 1 == $status ) {
 									if ( ! check_user_capabilities( 'xili_protect_content' ) ) {
-										return false;
+										return array(
+											'check'  => false,
+											'parent' => $single_image->post_parent,
+										);
 									}
 								}
 							}
@@ -200,7 +233,15 @@ function check_file_authorization( $full_file ) {
 					}
 				}
 			}
+			// must be refined
+			return array(
+				'check'  => true,
+				'parent' => $single_image->post_parent,
+			);
 		}
+		return array(
+			'check'  => true,
+			'parent' => 0,
+		);
 	}
-	return true;
 }

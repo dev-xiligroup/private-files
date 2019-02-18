@@ -58,7 +58,8 @@ https://wordpress.stackexchange.com/questions/37144/how-to-protect-uploads-if-us
 https://wordpress.stackexchange.com/questions/281500/protecting-direct-access-to-pdf-and-zip-unless-user-logged-in-without-plugin
 
 ## Versions
-
+### 0.3 - 190218
+more accurate tests - if not connected can define public attached file.
 ### 0.2 - 190215
 Test added to override file checking when post editing
 ### 0.0 - 190208
