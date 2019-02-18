@@ -35,7 +35,7 @@ Because this file is called only if rules inside .htaccess are met. In mu-plugin
 This choice to avoid unexpected deactivation.
 
 ### Why introducing capabilities in this example ?
-The posts found in [stackexchange](https://wordpress.stackexchange.com) only select connected and non connected user.
+The posts as found in example [stackexchange](https://wordpress.stackexchange.com) are only selected if connected and non connected user.
 By introducing capabilities, we can refine the selection according specific “group”.
 Here capability “read_xili_protect_content” is tested if post custom field ‘xili_protect_content’ of parent field is set to “1”.
 
