@@ -1,8 +1,8 @@
 # private-files
-WP private files according capabilities (of connected visitors) and parent (post linked to the attachment describing the file in WP database) custom fields. It is possible to define mime type of files that can be downloaded (or displayed) by non-connected visitors.
+In Wordpress, defines private access to files according to capabilities (of connected visitors) and parent (post linked to the attachment describing the file in WP database) custom fields. It is possible to define mime type of files that can be downloaded (or displayed) by non-connected visitors.
 
 ## protects files
-When downloading files from a WP website, test if the file can be downloaded. Test capabilities of connected user or test parent post (private or not) or custom fields of parent of attachment containing the file.
+When downloading files from a WP website, tests if the file can be downloaded. Test capabilities of connected user or test parent post (private or not) or custom fields of parent of attachment containing the file.
 
 ## prerequisites
 some knowledges in .htaccess and in WP core files.
